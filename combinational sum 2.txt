@@ -1,0 +1,30 @@
+class Solution {
+public:
+    vector<vector<int>> combinationSum2(vector<int>& cand, int target) {
+        sort(cand.begin(), cand.end());
+        vector<vector<int>> v;
+        vector<int> r;
+        dfs(cand, 0, target, r, v);
+        return v;
+    }
+    
+    void dfs(vector<int>& cand, int cur, int target, vector<int>& r, vector<vector<int>>& v) {
+        if (target == 0) {
+            v.push_back(r);
+            return;
+        }
+        if (target < 0) return;
+        
+        for (int i = cur; i < cand.size(); i++) {
+            if (i > cur && cand[i] == cand[i - 1]) continue; 
+            r.push_back(cand[i]);
+            dfs(cand, i + 1, target - cand[i], r, v);
+            r.pop_back(); 
+        }
+    }
+};
+
+
+
+
+
