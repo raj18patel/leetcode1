@@ -1,0 +1,23 @@
+class Solution {
+public:
+    bool lemonadeChange(vector<int>& bills) {
+        int cf=0, ct=0;
+        for(auto i:bills){
+            if(i==5)cf++;
+            else if(i==10 && cf>=1){
+                ct++;
+                cf--;
+            }
+            else if(i==20 && ct>=1 && cf>=1){
+                ct--;
+                cf--;
+            }
+            else if(i==20 && cf>=3){
+                cf-=3;
+            }
+            else return false;
+            
+        }
+        return true;
+    }
+};
