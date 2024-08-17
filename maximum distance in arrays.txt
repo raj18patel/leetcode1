@@ -1,0 +1,20 @@
+class Solution {
+public:
+    static int maxDistance(vector<vector<int>>& arrays) {
+        int minn=1e5, maxx=-1e5;
+        int ans=0;
+        int s=arrays.size();
+       
+        for(auto i: arrays){
+            int v=i[0], r=i.back();
+            ans=max({ans, r-minn, maxx-v});
+            minn=min(v, minn);
+            maxx=max(r, maxx);
+        }
+        return ans;
+    }
+};
+
+
+
+ 
