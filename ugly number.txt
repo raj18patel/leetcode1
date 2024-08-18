@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int nthUglyNumber(int n) {
+        set<long long int> set;
+        long long int v = 1;
+        set.insert(v);
+        for(int i=0; i<n; i++){
+            v = *set.begin();
+            set.erase(v);
+            set.insert(v*2);
+            set.insert(v*3);
+            set.insert(v*5);
+        }
+        return v;
+    }
+};
