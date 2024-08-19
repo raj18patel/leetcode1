@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int minSteps(int n) {
+        if(n==1) return 0;
+        int c=0;
+        int ans=2;
+        while(n>1){
+            while(n%ans==0){
+                c+=ans;
+                n=n/ans;
+            }
+            ans++;
+        }
+        return c;
+    }
+};
