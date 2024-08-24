@@ -1,0 +1,45 @@
+class Solution {
+public:
+    string nearestPalindromic(string n) {
+        int s = n.length();
+        if (s == 1) {
+            return to_string(stoi(n) - 1);  
+        }
+
+        
+        vector<long long> v;
+        
+        
+        v.push_back(pow(10, s - 1) - 1); 
+        
+        
+        v.push_back(pow(10, s) + 1);  
+
+       
+        long long prefix = stoll(n.substr(0, (s + 1) / 2));  
+
+        
+        for (int i = -1; i <= 1; ++i) {
+            string p = to_string(prefix + i);  
+            string candidate = p + string(p.rbegin() + (s % 2), p.rend());  
+            v.push_back(stoll(candidate));  
+        }
+
+        
+        long long num = stoll(n);
+
+        
+        long long r = -1;
+
+        for (long long a : v) {
+            if (a == num) continue;  
+            if (r == -1 ||
+                abs(a - num) < abs(r - num) || 
+                (abs(a - num) == abs(r - num) && a < r)) {  
+                r = a;
+            }
+        }
+
+        return to_string(r);  
+    }
+};
