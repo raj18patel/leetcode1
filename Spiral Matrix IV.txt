@@ -1,0 +1,47 @@
+class Solution {
+public:
+    vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
+        int t = 0, l = 0, r = n - 1, d = m - 1;
+        
+        vector<vector<int>> answer(m, vector<int>(n, -1));
+        while(t <= d && l <= r && head) {
+            
+                for(int col = t; col <= r; col++) {
+                    if(head==NULL) return answer;
+                    int val = head -> val;
+                    answer[t][col] = val;
+                    head = head -> next;
+                }
+                t++;
+            
+                for(int row = t; row <= d; row++) {
+                    if(!head) return answer;
+                    int val = head -> val;
+                    answer[row][r] = val;
+                    head = head -> next;
+                }
+                r--;
+            
+            if(t<=d) {
+                for(int col = r; col >= l; col--) {
+                    if(!head) return answer;
+                    int val = head -> val;
+                    answer[d][col] = val;
+                    head = head -> next;
+                }
+                d--;
+            }
+            if(l<=r) {
+                for(int row = d; row >= t; row--) {
+                    if(!head) return answer;
+                    int val = head -> val;
+                    answer[row][l] = val;
+                    head = head -> next;
+                }
+                l++;
+            }
+            
+        }
+        return answer ;
+    }
+};
