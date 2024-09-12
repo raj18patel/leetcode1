@@ -1,0 +1,22 @@
+class Solution {
+public:
+    int countConsistentStrings(string allowed, vector<string>& words) {
+        bitset<26>s=0;
+        int c=0;
+        for(char i:allowed){
+            s[i-'a']=1;
+        }
+        
+        for(auto i:words){
+            int v=1;
+            for(char j:i){
+                if(s[j-'a']==0){
+                    v=0;
+                    break;
+                }
+            }
+            c+=v;
+        }
+        return c;
+    }
+};
