@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<int> diffWaysToCompute(string expression) {
+        vector<int> res;
+        for (int i = 0; i < expression.size(); ++i) {
+            char v = expression[i];
+            if (v == '+' || v == '-' || v == '*') {
+                vector<int> r = diffWaysToCompute(expression.substr(0, i));
+                vector<int> d = diffWaysToCompute(expression.substr(i + 1));
+                for (int a : r) {
+                    for (int b : d) {
+                        if (v == '+') res.push_back(a + b);
+                        else if (v == '-') res.push_back(a - b);
+                        else if (v == '*') res.push_back(a * b);
+                    }
+                }
+            }
+        }
+        if (res.empty()) res.push_back(stoi(expression));
+        return res;
+    }
+};
