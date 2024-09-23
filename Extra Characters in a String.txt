@@ -1,0 +1,26 @@
+
+
+class Solution {
+public:
+    int minExtraChar(string s, vector<string>& dictionary) {
+        unordered_set<string> v(dictionary.begin(), dictionary.end()); 
+        int n = s.size();
+        vector<int> dp(n + 1, n);
+        
+        dp[0] = 0; 
+        
+        
+        for (int i = 1; i <= n; i++) {
+            
+            for (int j = 0; j < i; j++) {
+                string r = s.substr(j, i - j); 
+                if (v.find(r) != v.end()) {
+                    dp[i] = min(dp[i], dp[j]); 
+                }
+            }
+            dp[i] = min(dp[i], dp[i - 1] + 1); 
+        }
+        
+        return dp[n]; 
+    }
+};
