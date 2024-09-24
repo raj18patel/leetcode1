@@ -1,0 +1,34 @@
+class Solution {
+public:
+    int longestCommonPrefix(vector<int>& arr1, vector<int>& arr2) 
+    {
+        int ans = 0, v;
+        unordered_set<int>x;
+        unordered_set<int> r(begin(arr1), end(arr1));
+        unordered_set<int> a(begin(arr2), end(arr2));
+        for(auto i:a)
+        {
+            string cur;
+            string s = to_string(i);
+            for(auto c:s)
+            {
+                cur += c;
+                v = stoi(cur);
+                if(not x.count(v)) x.insert(v);
+            }
+        }
+
+        for(auto i:r)
+        {
+            string s = to_string(i);
+            string cur;
+            for(auto c:s)
+            {
+                cur += c;
+                v = stoi(cur);
+                if(x.count(v)) ans = max(ans, int(cur.size()));
+            }
+        }
+        return ans;
+    }
+};
