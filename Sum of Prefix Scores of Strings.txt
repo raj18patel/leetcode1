@@ -1,0 +1,42 @@
+class TrieNode {
+    public:
+    int count;
+    TrieNode* children[26];
+    TrieNode() : count(0), children{NULL} {}
+};
+class Solution {
+public:
+    vector<int> sumPrefixScores(vector<string>& words) 
+    {
+        auto *r = new TrieNode();
+
+        for(auto w : words)
+        {
+            auto *node = r;
+            for(auto i: w)
+            {
+                int v = i- 'a';
+                if(not node->children[v])
+                    node->children[v] = new TrieNode();
+                node = node->children[v];
+                node->count += 1;
+            }
+        }
+
+        vector<int>ans;
+        for(auto w : words)
+        {
+            auto sum  = 0;
+            auto *node = r;
+            for(auto i : w)
+            {
+                int v = i - 'a';
+                node = node->children[v];
+                sum += node->count;
+            }
+            ans.push_back(sum);
+        }
+
+        return ans;
+    }
+};
