@@ -1,0 +1,23 @@
+class CustomStack {
+public:
+    int r[1000];
+    int top, maxSz, sz;
+    CustomStack(int maxSize): top(-1), maxSz(maxSize){}
+    
+    void push(int x) {
+        if (top==maxSz-1) return;
+        r[++top]=x;
+    }
+    
+    int pop() {
+        if (top==-1) return -1;
+        return r[top--];
+    }
+    
+    void increment(int k, int val) {
+        int m=min(k, top+1);
+        for(int i=0; i<m; i++)
+            r[i]+=val;
+    }
+};
+
