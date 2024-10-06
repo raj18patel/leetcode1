@@ -1,0 +1,38 @@
+class Solution {
+public:
+    bool areSentencesSimilar(string s1, string s2) {
+        int l1=s1.length();
+        int l2=s2.length();
+        vector<string>v;
+        vector<string>r;
+        
+        
+        stringstream x(s1);
+        
+        string word1;
+        while(x>>word1){
+            v.push_back(word1);
+        }
+        string word2;
+        stringstream y(s2);
+        while(y>>word2){
+            r.push_back(word2);
+        }
+        int c1=0,c2=0,e1=v.size()-1,e2=r.size()-1;
+        while(c1<=e1 && c2<=e2){
+            if(v[c1]==r[c2]){
+                c1++;
+                c2++;
+            }
+            else if(v[e1]==r[e2]){
+                e1--;
+                e2--;
+            }
+            else {
+                return false;
+            }
+        }
+        return true;
+
+    }
+};
