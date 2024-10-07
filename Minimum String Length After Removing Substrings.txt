@@ -1,0 +1,16 @@
+class Solution {
+public:
+    int minLength(string s) {
+        stack<char> v;
+        for (char c : s) {
+            if (!v.empty() && 
+                ((v.top() == 'A' && c == 'B') || 
+                 (v.top() == 'C' && c == 'D'))) {
+                v.pop(); 
+            } else {
+                v.push(c); 
+            }
+        }
+        return v.size(); 
+    }
+};
