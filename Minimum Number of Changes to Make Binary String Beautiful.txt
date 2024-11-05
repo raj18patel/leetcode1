@@ -1,0 +1,11 @@
+class Solution {
+public:
+    int minChanges(string& s) {
+        const int n=s.size();
+        uint16_t* v=(uint16_t*) s.data();
+        int ans=0;
+        for(int i=0; i<n/2; i++)
+            ans+=(1&((v[i]>>8)^v[i]));
+        return ans;
+    }
+};
