@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int largestCombination(vector<int>& candidates) {
+        
+        int ans = 0;
+        for(int i=0;i<32;i++){
+            int c = 0;
+            for(auto candidate : candidates){
+                if(candidate & (1<<i))c++;
+            }
+            ans = max(ans,c);
+        }
+        return ans;
+    }
+};
