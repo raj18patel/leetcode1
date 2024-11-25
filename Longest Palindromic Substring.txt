@@ -1,0 +1,33 @@
+class Solution {
+public:
+    string longestPalindrome(string s) {
+        if (s.empty()) {
+            return "";
+        }
+
+        int v = 0;
+        int r = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            int odd = pld(s, i, i);
+            int even = pld(s, i, i + 1);
+            int max_len = max(odd, even);
+
+            if (max_len > r - v) {
+                v = i - (max_len - 1) / 2;
+                r = i + max_len / 2;
+            }
+        }
+
+        return s.substr(v, r - v + 1);        
+    }
+
+private:
+    int pld(string s, int left, int right) {
+        while (left >= 0 && right < s.length() && s[left] == s[right]) {
+            left--;
+            right++;
+        }
+        return right - left - 1;
+    }    
+};
