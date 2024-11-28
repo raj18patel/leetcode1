@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int minimumObstacles(vector<vector<int>>& grid) {
+        int r = grid.size(), c = grid[0].size();
+        deque<pair<int, int>> DQ{{0, 0}};
+        vector<vector<int>> v(r, vector<int>(c, INT_MAX));
+        v[0][0] = 0;
+        vector<int> dx = {1, -1, 0, 0}, dy = {0, 0, 1, -1};
+        while (!DQ.empty()) {
+            auto [x, y] = DQ.front();
+            DQ.pop_front();
+            for (int k = 0; k < 4; ++k) {
+                int nx = x + dx[k], ny = y + dy[k];
+                if (nx >= 0 && ny >= 0 && nx < r && ny < c) {
+                    int d = v[x][y] + grid[nx][ny];
+                    if (d < v[nx][ny]) {
+                        v[nx][ny] = d;
+                        grid[nx][ny] == 0 ? DQ.push_front({nx, ny}) : DQ.push_back({nx, ny});
+                    }
+                }
+            }
+        }
+        return v[r - 1][c - 1];
+    }
+};
+// auto io_opt = [] { ios::sync_with_stdio(false); cin.tie(nullptr); return 0; }();
