@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<vector<int>> validArrangement(vector<vector<int>>& pairs) {
+        unordered_map<int,unordered_set<int>> g;
+        unordered_map<int,pair<int,int>> r;
+        for(auto p: pairs){
+            g[p[0]].insert(p[1]);
+            r[p[1]].first++; 
+            r[p[0]].second++; 
+        }
+        auto getsrc = [&](){
+            int src;
+            for(auto [e,d]: r){
+                auto [in,out] = d;
+                if(out-in == 1){
+                    src = e;
+                    break;
+                }
+                src = e;
+            }
+            return src;
+        };
+        int src = getsrc();
+        deque<int> x;
+        stack<int> y;
+        y.push(src);
+        while(!y.empty()){
+            int u = y.top();
+            if(g[u].size() == 0){
+                x.push_front(u);
+                y.pop();
+            }else{
+                int v = *g[u].begin();
+                g[u].erase(v);
+                y.push(v);
+            }
+        }
+        vector<vector<int>> v;
+        int n = x.size();
+        for(int i=0; i<n-1; ++i){
+            v.push_back({x[i],x[i+1]});
+        }
+        return v;
+    }
+};
