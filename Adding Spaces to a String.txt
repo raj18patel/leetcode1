@@ -1,0 +1,17 @@
+class Solution {
+public:
+    string addSpaces(string& s, vector<int>& spaces) {
+        const int v = spaces.size(), r = s.size();
+        string t(r + v, ' ');
+        
+        int j = 0; 
+        for (int i = 0; i < r; i++) {
+            if (j < v && i == spaces[j]) {
+                t[i+j] = ' '; 
+                j++;      
+            }
+            t[i+j]=s[i]; 
+        }
+        return t;
+    }
+};
