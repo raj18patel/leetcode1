@@ -1,0 +1,13 @@
+class Solution {
+public:
+    bool canMakeSubsequence(string source, string target) {
+        int v = 0;
+        int d = target.length();
+        for (char c : source) {
+            if (v < d && (target[v] - c + 26) % 26 <= 1) {
+                v++;
+            }
+        }
+        return v == d;
+    }
+};
