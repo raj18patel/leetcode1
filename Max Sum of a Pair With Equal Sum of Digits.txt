@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int maximumSum(vector<int>& nums) {
+        int s=nums.size();
+        unordered_map<int,int>m;
+        int ans=-1;
+        for(auto i:nums){
+            int v=i;
+            int sum=0;
+            while(v!=0){
+                sum=sum+(v%10);
+                v=v/10;
+            }
+            if(m[sum]!=0) ans=max(ans, i+m[sum]);
+            m[sum]=max(i,m[sum]);
+        }
+        return ans;
+    }
+};
