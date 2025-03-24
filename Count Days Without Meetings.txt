@@ -1,0 +1,25 @@
+class Solution {
+public:
+    int countDays(int days, vector<vector<int>>& meetings) {
+        int count=0;
+        vector<int>ans(days,0);
+        int s=meetings.size();
+        // int i=0;
+        for(int i=0;i<s;i++){
+
+            for(int j=meetings[i][0];j<=meetings[i][1];j++){
+                if(ans[j-1]==0){
+                    ans[j-1]=1;
+                }
+            }
+            
+            i++;
+        }
+        for(int i=0;i<ans.size();i++){
+            if(ans[i]==0){
+                count++;
+            }
+        }
+        return count;
+    }
+};
