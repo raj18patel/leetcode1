@@ -1,0 +1,24 @@
+class Solution {
+public:
+
+    bool chek(vector<vector<int>>v){
+        int count =0;
+        int end=v[0][1];
+        for(auto i:v){
+            if(end<=i[0]){
+                count++;
+            }
+            end=max(end,i[1]);
+        }
+        return count>=2;
+    }
+    bool checkValidCuts(int n, vector<vector<int>>& rectangles) {
+        vector<vector<int>>x;
+        vector<vector<int>>y;
+        for(auto i:rectangles){
+            x.push_back({i[0],i[2]});
+            y.push_back({i[1],i[3]});
+        }
+        return chek(x) || chek(y) ;
+    }
+};
