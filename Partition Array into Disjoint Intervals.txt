@@ -1,0 +1,17 @@
+class Solution {
+public:
+    int partitionDisjoint(vector<int>& nums) {
+        int cur =nums[0];
+        int poss= nums[0];
+        int len=1;
+        for(int i=1;i<nums.size();i++){
+            if(nums[i]<cur){
+                len=i+1;
+                cur=poss;
+            }else{
+                poss =max(poss,nums[i]);
+            }
+        }
+        return len;
+    }
+};
