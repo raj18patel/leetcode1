@@ -1,0 +1,29 @@
+class Solution {
+public:
+    int minimumSum(vector<int>& nums) {
+        int n = nums.size();
+
+        vector<int> prefix_min(n), suffix_min(n);
+
+        prefix_min[0] = nums[0];
+        suffix_min[n - 1] = nums[n - 1];
+
+        for (int i = 1; i < n; i++)
+            prefix_min[i] = min(prefix_min[i - 1], nums[i]);
+
+        for (int i = n - 2; i >= 0; i--)
+            suffix_min[i] = min(suffix_min[i + 1], nums[i]);
+
+        int ans = INT_MAX;
+        bool flag = 0;
+        for (int i = 1; i < n - 1; i++) {
+            if (prefix_min[i - 1] < nums[i] && suffix_min[i + 1] < nums[i]) {
+                ans = min(ans, prefix_min[i - 1] + nums[i] + suffix_min[i + 1]);
+                flag = 1;
+            }
+        }
+
+        if(flag==0)return -1;
+        return ans;
+    }
+};
